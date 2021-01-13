@@ -21,11 +21,11 @@ class FileSplit(object):
         self.log = logging.getLogger(__name__)
         self.log.info("Initializing file split module.")
         if not os.path.isfile(file):
-            raise FileNotFoundError("The given file path '{0}' is not valid".format(file))
+            raise IOError("The given file path '{0}' is not valid".format(file))
         self.file = file
         self.log.info("Given input file : '{0}'".format(self.file))
         if not os.path.exists(output_dir):
-            raise NotADirectoryError("The given output path '{0}' is not a valid directory".format(output_dir))
+            raise IOError("The given output path '{0}' is not a valid directory".format(output_dir))
         self.output_dir = output_dir
         self.log.info("Given output directory: '{0}'".format(self.output_dir))
         self._buffer_size = 1000000  # 1MB
