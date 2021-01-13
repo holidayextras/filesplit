@@ -48,7 +48,7 @@ class FileSplit(object):
         # Keep track of file splits and increment the file counter accordingly
         filecounter = 1
         # Open the file in read-only mode with the given encoding
-        with open(file=self.file, mode="rb") as f:
+        with open(self.file, mode="rb") as f:
             # Iterate and write to file in append mode.
             while filecounter is not None:
                 outfile = os.path.join(self.output_dir, "{0}_{1}{2}".format(filename, filecounter, ext))
@@ -57,7 +57,7 @@ class FileSplit(object):
                 if os.path.exists(outfile):
                     self.log.debug("Removing an existing file with the filename '{0}'".format(outfile))
                     os.remove(outfile)
-                with open(file=outfile, mode="ab") as of:
+                with open(outfile, mode="ab") as of:
                     self.log.info("Writing to file '{0}'".format(outfile))
                     total_size, line_count, carryover = self._process_(f, of, include_header)
                 # Log the file details
@@ -91,7 +91,7 @@ class FileSplit(object):
         # Keep track of file splits and increment the file counter accordingly
         filecounter = 1
         # Open the file in read-only mode with the given encoding
-        with open(file=self.file, mode="r", encoding=rencoding) as f:
+        with open(self.file, mode="r", encoding=rencoding) as f:
             # Iterate and write to file in append mode.
             while filecounter is not None:
                 outfile = os.path.join(self.output_dir, "{0}_{1}{2}".format(filename, filecounter, ext))
@@ -100,7 +100,7 @@ class FileSplit(object):
                 if os.path.exists(outfile):
                     self.log.debug("Removing an existing file with the filename '{0}'".format(outfile))
                     os.remove(outfile)
-                with open(file=outfile, mode="a", encoding=wencoding) as of:
+                with open(outfile, mode="a", encoding=wencoding) as of:
                     self.log.info("Writing to file '{0}'".format(outfile))
                     total_size, line_count, carryover = self._process_(f, of, include_header, wencoding)
                 # Log the file details
